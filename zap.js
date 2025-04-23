@@ -29,32 +29,7 @@ auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     });
 
 // Check if user is already logged in
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        // Store user ID in localStorage
-        localStorage.setItem('loggedInUserId', user.uid);
-        
-        // Get user data from Firestore
-        db.collection("users").doc(user.uid).get().then((docSnap) => {
-            if (docSnap.exists()) {
-                const userData = docSnap.data();
-                console.log("User data:", userData);
-            }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
-        
-        // Redirect to main site
-        redirectToMainSite();
-    }
-});
 
-function redirectToMainSite() {
-    document.body.style.animation = 'fadeOut 0.5s ease forwards';
-    setTimeout(() => {
-        window.location.href = 'https://moviehub07.neocities.org/zap/home';
-    }, 500);
-}
 
 // Tab Switching
 document.querySelectorAll('.auth-tab, .switch-tab').forEach(tab => {
