@@ -55,20 +55,20 @@
             <form id="checkout-form">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <input style="border : 1px solid gray; border-radius: 10px; padding : 10px 10px" type="text" placeholder="Enter your name" id="name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <input style="border : 1px solid gray; border-radius: 10px; padding : 10px 10px" type="email" placeholder="Enter your Email ID" id="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">Mobile Number</label>
-                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+                    <input style="border : 1px solid gray; border-radius: 10px; padding : 10px 10px" type="tel" placeholder="Enter your mobile number" id="phone" name="phone" pattern="[0-9]{10}" required>
                 </div>
                 
                 <div class="payment-section">
                     <h3>Payment Details</h3>
-                    <div id="qr-container" class="qr-container blurred">
+                    <div id="qr-container" class="qr-container blurred" style="pointer-events:none">
                         <div class="qr-code">
                             <img src="https://moviehub07.neocities.org/zap/images/Fampay%20QR.jpg" alt="Payment QR Code">
                         </div>
