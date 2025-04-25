@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zapsters - Login</title>
+    <title>Zapsters</title>
     <link rel="shortcut icon" href="https://moviehub07.neocities.org/zap/images/log.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <script type="module" src="firebaseauth.js"></script>
+   
     <style>
         /* ===== Base Styles ===== */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@800;900&display=swap');
@@ -222,101 +222,6 @@
             animation-delay: 2s;
         }
         
-        /* ===== Auth Form Styles ===== */
-        .auth-container {
-            background: rgba(45, 52, 54, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: var(--space-xl);
-            width: 100%;
-            max-width: 450px;
-            box-shadow: var(--shadow-xl), var(--shadow-neon);
-            margin-top: var(--space-lg);
-            border: 1px solid rgba(162, 155, 254, 0.2);
-            transition: var(--transition-normal);
-        }
-        
-        .auth-container:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl), 0 0 30px 5px rgba(108, 92, 231, 0.7);
-        }
-        
-        .auth-tabs {
-            display: flex;
-            margin-bottom: var(--space-lg);
-            border-bottom: 1px solid rgba(162, 155, 254, 0.2);
-        }
-        
-        .auth-tab {
-            flex: 1;
-            padding: var(--space-sm);
-            text-align: center;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--light-2);
-            transition: var(--transition-fast);
-            position: relative;
-        }
-        
-        .auth-tab.active {
-            color: white;
-        }
-        
-        .auth-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 3px 3px 0 0;
-        }
-        
-        .auth-tab:hover:not(.active) {
-            color: var(--secondary);
-        }
-        
-        .auth-form {
-            display: none;
-        }
-        
-        .auth-form.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .form-group {
-            margin-bottom: var(--space-md);
-            text-align: left;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: var(--space-xs);
-            font-weight: 500;
-            color: var(--light);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: var(--space-sm);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(162, 155, 254, 0.3);
-            border-radius: 8px;
-            color: white;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition-fast);
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.3);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
         /* ===== Button Styles ===== */
         .btn {
             display: inline-flex;
@@ -335,7 +240,9 @@
             outline: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            width: 100%;
+            width: auto;
+            min-width: 200px;
+            margin-top: var(--space-lg);
         }
         
         .btn-primary {
@@ -389,87 +296,6 @@
         .btn-primary:hover::after {
             left: 100%;
         }
-        
-        .btn-google {
-            background: white;
-            color: #4285F4;
-            box-shadow: var(--shadow-md);
-            margin-bottom: var(--space-sm);
-        }
-        
-        .btn-google:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .btn-google i {
-            margin-right: var(--space-sm);
-            color: #DB4437;
-        }
-        
-        .auth-divider {
-            display: flex;
-            align-items: center;
-            margin: var(--space-md) 0;
-            color: var(--light-2);
-        }
-        
-        .auth-divider::before,
-        .auth-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: rgba(162, 155, 254, 0.3);
-        }
-        
-        .auth-divider span {
-            padding: 0 var(--space-sm);
-        }
-        
-        .auth-footer {
-            margin-top: var(--space-md);
-            font-size: 0.9rem;
-            color: var(--light-2);
-        }
-        
-        .auth-footer a {
-            color: var(--primary-light);
-            font-weight: 600;
-        }
-        
-        .auth-message {
-            padding: var(--space-sm);
-            border-radius: 8px;
-            margin-bottom: var(--space-md);
-            text-align: center;
-            font-weight: 500;
-            display: none;
-        }
-        
-        .auth-message.success {
-            background: rgba(0, 184, 148, 0.2);
-            border: 1px solid var(--success);
-            color: var(--success);
-            display: block;
-        }
-        
-        .auth-message.error {
-            background: rgba(214, 48, 49, 0.2);
-            border: 1px solid var(--danger);
-            color: var(--danger);
-            display: block;
-        }
-        .messageDiv{
-    background-color:hsl(327,90%,28%);
-    color:white;
-    padding:10px 20px;
-    margin:10px;
-    border-radius: 5px;
-    font-size:1rem;
-    opacity:0;
-    animation:fadeOut 7s forwards;
-
-}
         
         /* ===== Floating Elements ===== */
         .floating-elements {
@@ -627,19 +453,11 @@
                 width: 260px;
                 height: 260px;
             }
-            
-            .auth-container {
-                padding: var(--space-lg);
-            }
         }
         
         @media (max-width: 576px) {
             h1 {
                 font-size: 2rem;
-            }
-            
-            .auth-container {
-                padding: var(--space-md);
             }
         }
     </style>
@@ -656,7 +474,7 @@
         <div class="floating-element"></div>
     </div>
     
-    <!-- Hero Section with Auth Form -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container flex-center flex-column">
             <div class="logo-container">
@@ -668,105 +486,18 @@
             
             <h1>WELCOME TO ZAPSTERS</h1>
             <p class="subtitle animate__animated animate__fadeIn animate__delay-1s">
-                Sign in to access exclusive content and features
+                Your ultimate entertainment destination
             </p>
             
-            <!-- Auth Container -->
-            <div class="auth-container animate__animated animate__fadeInUp animate__delay-2s">
-                <div class="auth-tabs">
-                    <div class="auth-tab active" data-tab="login">Sign In</div>
-                    <div class="auth-tab" data-tab="register">Register</div>
-                    <div id="signUpMessage" class="messageDiv" style="display: none;"></div>
-                </div>
-                
-                <!-- Login Form -->
-                <form id="loginForm" class="auth-form active">
-                    <div id="loginMessage" class="auth-message"></div>
-                    
-                    <div class="form-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
-                    </div>
-                    <!-- Inside your register form, add this before the submit button -->
-                    <div class="form-group">
-                       <label for="registerConfirmPassword">Confirm Password</label>
-                      <input type="password" id="registerConfirmPassword" class="form-control" placeholder="Confirm your password" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">
-                            <span id="loginBtnText">Sign In</span>
-                            <div id="signInMessage" class="messageDiv" style="display: none;"></div>
-                            <span id="loginSpinner" style="display: none; margin-left: 8px;">
-                                <i class="fas fa-spinner fa-spin"></i>
-                            </span>
-                        </button>
-                    </div>
-                    
-                    <div class="auth-divider">
-                        <span>OR</span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <button type="button" class="btn btn-google" id="googleSignIn">
-                            <i class="fab fa-google"></i> Sign in with Google
-                        </button>
-                    </div>
-                    
-                    <div class="auth-footer">
-                        <a href="#" id="forgotPassword">Forgot password?</a>
-                    </div>
-                </form>
-                
-                <!-- Register Form -->
-                <form id="registerForm" class="auth-form">
-                    <div id="registerMessage" class="auth-message"></div>
-                    
-                    <div class="form-group">
-                        <label for="registerName">Full Name</label>
-                        <input type="text" id="registerName" class="form-control" placeholder="Enter your full name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" class="form-control" placeholder="Enter your email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="registerPassword">Password</label>
-                        <input type="password" id="registerPassword" class="form-control" placeholder="Create a password" required>
-                    </div>
-                    
-                    
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">
-                            <span id="registerBtnText">CreateAccount</span>
-                            <span id="registerSpinner" style="display: none; margin-left: 8px;">
-                                <i class="fas fa-spinner fa-spin"></i>
-                            </span>
-                        </button>
-                    </div>
-                    
-                    <div class="auth-footer">
-                        Already have an account? <a href="#" class="switch-tab" data-tab="login">Sign in</a>
-                    </div>
-                </form>
-            </div>
+            <button class="btn btn-primary animate__animated animate__fadeInUp animate__delay-2s" id="enterButton">
+                ENTER SITE
+                <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+            </button>
         </div>
     </section>
     
     <!-- Scripts -->
-     <script type="module" src="firebaseauth.js" ></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script>
         // Initialize particles.js
         particlesJS("particles-js", {
@@ -875,243 +606,12 @@
             "retina_detect": true
         });
         
-        // Firebase Configuration (Replace with your actual Firebase config)
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-        
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        
-        // Set persistence (optional but recommended)
-        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .then(() => {
-                console.log("Auth persistence enabled");
-            })
-            .catch((error) => {
-                console.error("Error enabling persistence:", error);
-            });
-
-        // Check if user is already logged in
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in, redirect to main site
-                redirectToMainSite();
-            }
-        });
-
-        function redirectToMainSite() {
+        // Enter button functionality
+        document.getElementById('enterButton').addEventListener('click', function() {
             document.body.style.animation = 'fadeOut 0.5s ease forwards';
             setTimeout(() => {
                 window.location.href = 'https://moviehub07.neocities.org/zap/home';
             }, 500);
-        }
-        
-        // Tab Switching
-        document.querySelectorAll('.auth-tab, .switch-tab').forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                e.preventDefault();
-                const tabId = this.getAttribute('data-tab');
-                
-                // Update active tab
-                document.querySelectorAll('.auth-tab').forEach(t => {
-                    t.classList.remove('active');
-                });
-                document.querySelector(`.auth-tab[data-tab="${tabId}"]`).classList.add('active');
-                
-                // Update active form
-                document.querySelectorAll('.auth-form').forEach(form => {
-                    form.classList.remove('active');
-                });
-                document.getElementById(`${tabId}Form`).classList.add('active');
-            });
-        });
-        
-        // Login Form Submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            const loginBtnText = document.getElementById('loginBtnText');
-            const loginSpinner = document.getElementById('loginSpinner');
-            const message = document.getElementById('loginMessage');
-            
-            // Show loading state
-            loginBtnText.textContent = 'Signing In...';
-            loginSpinner.style.display = 'inline-block';
-            
-            // Firebase login
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Update last login timestamp
-                    return db.collection('users').doc(userCredential.user.uid).update({
-                        lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                })
-                .then(() => {
-                    // Success
-                    message.textContent = 'Login successful! Redirecting...';
-                    message.className = 'auth-message success';
-                    
-                    // Redirect
-                    redirectToMainSite();
-                })
-                .catch((error) => {
-                    // Error handling
-                    let errorMessage = 'An error occurred. Please try again.';
-                    switch(error.code) {
-                        case 'auth/user-not-found':
-                            errorMessage = 'No user found with this email.';
-                            break;
-                        case 'auth/wrong-password':
-                            errorMessage = 'Incorrect password.';
-                            break;
-                        case 'auth/invalid-email':
-                            errorMessage = 'Invalid email format.';
-                            break;
-                        case 'auth/user-disabled':
-                            errorMessage = 'This account has been disabled.';
-                            break;
-                    }
-                    
-                    message.textContent = errorMessage;
-                    message.className = 'auth-message error';
-                    
-                    // Reset button state
-                    loginBtnText.textContent = 'Sign In';
-                    loginSpinner.style.display = 'none';
-                });
-        });
-        
-        // Register Form Submission
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('registerName').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('registerConfirmPassword').value;
-            const registerBtnText = document.getElementById('registerBtnText');
-            const registerSpinner = document.getElementById('registerSpinner');
-            const message = document.getElementById('registerMessage');
-            
-            // Validate passwords match
-            if (password !== confirmPassword) {
-                message.textContent = 'Passwords do not match.';
-                message.className = 'auth-message error';
-                return;
-            }
-            
-            // Show loading state
-            registerBtnText.textContent = 'Creating Account...';
-            registerSpinner.style.display = 'inline-block';
-            
-            // Firebase registration
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Update user profile with name
-                    return userCredential.user.updateProfile({
-                        displayName: name
-                    }).then(() => {
-                        // Store additional user data in Firestore
-                        return db.collection('users').doc(userCredential.user.uid).set({
-                            name: name,
-                            email: email,
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                    });
-                })
-                .then(() => {
-                    // Success
-                    message.textContent = 'Registration successful! You are now signed in.';
-                    message.className = 'auth-message success';
-                    
-                    // Redirect after delay
-                    redirectToMainSite();
-                })
-                .catch((error) => {
-                    // Error handling
-                    let errorMessage = 'An error occurred. Please try again.';
-                    switch(error.code) {
-                        case 'auth/email-already-in-use':
-                            errorMessage = 'This email is already registered.';
-                            break;
-                        case 'auth/invalid-email':
-                            errorMessage = 'Invalid email format.';
-                            break;
-                        case 'auth/weak-password':
-                            errorMessage = 'Password should be at least 6 characters.';
-                            break;
-                    }
-                    
-                    message.textContent = errorMessage;
-                    message.className = 'auth-message error';
-                    
-                    // Reset button state
-                    registerBtnText.textContent = 'Create Account';
-                    registerSpinner.style.display = 'none';
-                });
-        });
-        
-        // Google Sign In
-        document.getElementById('googleSignIn').addEventListener('click', function() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            const message = document.getElementById('loginMessage');
-            
-            auth.signInWithPopup(provider)
-                .then((result) => {
-                    // Check if this is a new user
-                    if (result.additionalUserInfo.isNewUser) {
-                        // Store new user data in Firestore
-                        return db.collection('users').doc(result.user.uid).set({
-                            name: result.user.displayName,
-                            email: result.user.email,
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                    } else {
-                        // Update last login for existing user
-                        return db.collection('users').doc(result.user.uid).update({
-                            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                    }
-                })
-                .then(() => {
-                    // Success
-                    message.textContent = 'Google sign-in successful! Redirecting...';
-                    message.className = 'auth-message success';
-                    
-                    // Redirect after delay
-                    redirectToMainSite();
-                })
-                .catch((error) => {
-                    // Error handling
-                    message.textContent = 'Google sign-in failed. Please try again.';
-                    message.className = 'auth-message error';
-                });
-        });
-        
-        // Forgot Password
-        document.getElementById('forgotPassword').addEventListener('click', function(e) {
-            e.preventDefault();
-            const email = prompt('Please enter your email address to reset your password:');
-            
-            if (email) {
-                auth.sendPasswordResetEmail(email)
-                    .then(() => {
-                        alert('Password reset email sent. Please check your inbox.');
-                    })
-                    .catch((error) => {
-                        alert('Error sending reset email: ' + error.message);
-                    });
-            }
         });
     </script>
 </body>
