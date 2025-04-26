@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Replace your current viewport meta tag with this -->
+<meta name="viewport" content="width=1200, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>My E-Commerce Store</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,6 +41,66 @@
             overflow-x: hidden;
             position: relative;
         }
+        /* Add this to your existing CSS */
+body {
+    min-width: 1200px;
+    overflow-x: auto;
+}
+
+.container {
+    min-width: 1200px;
+}
+
+/* Disable responsive styles */
+@media (max-width: 1024px) {
+    .products {
+        grid-template-columns: repeat(3, 1fr) !important; /* Force 3 columns */
+    }
+    
+    .nav-links {
+        gap: 40px !important; /* Keep original gap */
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: row !important; /* Keep horizontal layout */
+        padding: 20px 20px !important;
+    }
+    
+    .nav-container {
+        flex-direction: row !important;
+        margin-top: 0 !important;
+    }
+    
+    .logo {
+        margin-right: 40px !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .nav-links {
+        width: auto !important;
+        justify-content: center !important;
+        margin-bottom: 0 !important;
+        gap: 40px !important;
+    }
+    
+    .icons {
+        margin-left: 40px !important;
+    }
+    
+    .products {
+        grid-template-columns: repeat(3, 1fr) !important; /* Force 3 columns */
+    }
+    
+    .product-image {
+        height: 250px !important; /* Keep original height */
+    }
+    
+    .section-title {
+        font-size: 32px !important; /* Keep original size */
+    }
+}
         
         /* Particle Background */
         #particles-js {
