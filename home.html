@@ -101,7 +101,43 @@ body {
         font-size: 32px !important; /* Keep original size */
     }
 }
+.payment-page-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
         
+        .payment-page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close-payment-page {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+        
+        .close-payment-page:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
         /* Particle Background */
         #particles-js {
             position: fixed;
@@ -1042,8 +1078,11 @@ body {
     </div>
     
     <!-- Payment Page (hidden by default) -->
-    <div id="payment-page">
-        <div class="container">
+       <div class="payment-page-container" id="payment-page-container">
+        <span class="close-payment-page" id="close-payment-page">&times;</span>
+        <div class="payment-page-content">
+            <h2 class="section-title">Checkout</h2>
+            
             <!-- Payment Steps -->
             <div class="payment-steps">
                 <div class="step active" id="step1">
@@ -1060,7 +1099,7 @@ body {
                 </div>
             </div>
             
-            <!-- Cart Summary (always visible) -->
+            <!-- Cart Summary -->
             <div class="cart-summary">
                 <h3>Order Summary</h3>
                 <div id="payment-items"></div>
@@ -1138,41 +1177,38 @@ body {
                     id="complete-order" 
                     style="padding: 12px; margin-top: 30px; background: linear-gradient(to right, var(--success), #2ecc71); border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; width: 100%;"
                 >
-                     CONTINUE
+                    CONTINUE
                 </button>
-              
             </div>
             
             <!-- Step 3: Order Complete (hidden initially) -->
-           <!-- Step 3: Order Complete (hidden initially) -->
-<div id="order-complete-section" style="display: none; text-align: center;">
-    <i class="fas fa-check-circle" style="font-size: 60px; color: var(--success); margin-bottom: 20px;"></i>
-    <h3 style="margin-bottom: 15px; color: var(--success);">Order Placed Successfully!</h3>
-    <p style="margin-bottom: 20px;">Thank you for your purchase. Your order has been confirmed.</p>
-    <p style="margin-bottom: 20px;">An email with your order details has been sent to <span id="confirmation-email" style="font-weight: bold;"></span></p>
-    
-    <p style="margin-bottom: 15px; font-weight: bold;">CLICK BELOW TO SHARE YOUR PAYMENT PROOF</p>
-    
-    <div style="display: flex; gap: 15px; margin-top: 15px; justify-content: center;">
-        <a href="https://wa.me/qr/NZZP4XRIF2KPI1" target="_blank" 
-           style="padding: 12px; background: linear-gradient(to right, #25D366, #128C7E); border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-        
-        <a href="https://www.instagram.com/zapster_25?igsh=M2M1cG16cGJzOXF3" target="_blank" 
-           style="padding: 12px; background: linear-gradient(to right, #833AB4, #E1306C, #F77737); border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <i class="fab fa-instagram"></i> Instagram
-        </a>
-    </div>
-    
-   
-</div>
- <button 
-        id="back-to-shop" 
-        style="padding: 12px; margin-top: 30px; background: linear-gradient(to right, var(--accent), #f39c12); border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;"
-    >
-        <i class="fas fa-arrow-left"></i> Back to Shopping
-    </button>
+            <div id="order-complete-section" style="display: none; text-align: center;">
+                <i class="fas fa-check-circle" style="font-size: 60px; color: var(--success); margin-bottom: 20px;"></i>
+                <h3 style="margin-bottom: 15px; color: var(--success);">Order Placed Successfully!</h3>
+                <p style="margin-bottom: 20px;">Thank you for your purchase. Your order has been confirmed.</p>
+                <p style="margin-bottom: 20px;">An email with your order details has been sent to <span id="confirmation-email" style="font-weight: bold;"></span></p>
+                
+                <p style="margin-bottom: 15px; font-weight: bold;">CLICK BELOW TO SHARE YOUR PAYMENT PROOF</p>
+                
+                <div style="display: flex; gap: 15px; margin-top: 15px; justify-content: center;">
+                    <a href="https://wa.me/qr/NZZP4XRIF2KPI1" target="_blank" 
+                       style="padding: 12px; background: linear-gradient(to right, #25D366, #128C7E); border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    
+                    <a href="https://www.instagram.com/zapster_25?igsh=M2M1cG16cGJzOXF3" target="_blank" 
+                       style="padding: 12px; background: linear-gradient(to right, #833AB4, #E1306C, #F77737); border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                </div>
+                
+                <button 
+                    id="back-to-shop" 
+                    style="padding: 12px; margin-top: 30px; background: linear-gradient(to right, var(--accent), #f39c12); border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;"
+                >
+                    <i class="fas fa-arrow-left"></i> Back to Shopping
+                </button>
+            </div>
         </div>
     </div>
     
@@ -1326,7 +1362,7 @@ body {
                 {
                     id: 1,
                     title: "AMAZON PRIME",
-                    price: 80,
+                    price: 79,
                     image: "https://moviehub07.neocities.org/zap/images/Amazon-Prime-video-plans.jpg",
                     rating: 4.5,
                     featured: true,
@@ -1344,7 +1380,7 @@ body {
                 {
                     id: 2,
                     title: "NETFLIX",
-                    price: 170,
+                    price: 169,
                     image: "https://moviehub07.neocities.org/zap/images/netflix.jpg",
                     rating: 5,
                     badge: "New",
@@ -1428,7 +1464,7 @@ body {
                 {
                      id: 7,
     title: "CANVA PREMIUM",
-    price: 69,
+    price: 149,
     image: "https://moviehub07.neocities.org/zap/images/canva.jpg",
     rating: 4,
     description: "Canva Premium gives you access to professional design tools, millions of premium templates, and advanced features to create stunning visuals.",
@@ -1471,6 +1507,54 @@ body {
             "Priority access to new features and improvements",
           "Advanced data analysis capabilities",
             "Web browsing and plugin access"
+                    ]
+                },
+                {
+                    id: 10,
+         title: "SURFSHARK",
+          price: 69,
+           image: "https://moviehub07.neocities.org/zap/images/surf.jpg",
+          rating: 4,
+               description: "Surfshark VPN provides secure and private internet access with unlimited simultaneous connections, strong encryption, and a strict no-logs policy.",
+        features: [
+               "3 MONTH PACKAGE",
+            "Unlimited simultaneous connections",
+            "Strong AES-256-GCM encryption",
+            "Strict no-logs policy",
+            "CleanWeb ad and malware blocker",
+            "24/7 customer support"
+                    ]
+                },
+                {
+                    id: 11,
+         title: "EXPRESS",
+          price: 69,
+           image: "https://moviehub07.neocities.org/zap/images/exp.jpg",
+          rating: 4,
+               description:"ExpressVPN offers lightning-fast speeds, best-in-class encryption, and servers in 94 countries for reliable and secure internet access.",
+        features: [
+                "2 MONTH PACKAGE",
+            "Servers in 94 countries",
+            "TrustedServer technology (RAM-only servers)",
+            "Network Lock kill switch",
+            "Split tunneling feature",
+            "24/7 live chat support"
+                    ]
+                },
+                {
+                    id: 12,
+         title: "NORD",
+          price: 69,
+           image: "https://moviehub07.neocities.org/zap/images/nord.jpg",
+          rating: 4,
+          description: "NordVPN provides advanced security features like Double VPN, Onion Over VPN, and CyberSec for comprehensive online protection.",
+        features: [
+            "2 MONTH PACKAGE",
+            "Double VPN encryption",
+            "Onion Over VPN for extra anonymity",
+            "CyberSec ad and malware blocker",
+            "Dedicated IP option",
+            "6 simultaneous connections"
                     ]
                 }
             ];
@@ -1698,22 +1782,18 @@ body {
             }
             
             // Initialize the page
-            function init() {
-                renderProducts(products);
-                updateCartCount();
-                updateWishlistCount();
-                
-                // Check if any products should be in wishlist from previous session
-                // (This would typically be saved in localStorage in a real app)
-            }
-            
-            // Event listeners
-            cartIcon.addEventListener('click', function() {
-                if (cart.length === 0) {
-                    showAlert('Your cart is empty!');
-                    return;
-                }
-                const cartModal = document.getElementById('cart-modal');
+            // Initialize the page
+function init() {
+    renderProducts(products);
+    updateCartCount();
+    updateWishlistCount();
+    
+    // Check if any products should be in wishlist from previous session
+    // (This would typically be saved in localStorage in a real app)
+}
+
+// Event listeners
+const cartModal = document.getElementById('cart-modal');
 const closeCart = document.querySelector('.close-cart');
 const cartItemsContainer = document.getElementById('cart-items');
 const cartTotal = document.getElementById('cart-total');
@@ -1750,211 +1830,231 @@ function populateCartModal() {
 }
 
 // Toggle cart modal
-cartIcon.addEventListener('click', function () {
-    populateCartModal();
-    cartModal.style.display = 'flex';
+cartIcon.addEventListener('click', function() {
+    if (cart.length === 0) {
+        showAlert('Your cart is empty!');
+        return;
+    }
+    
+    // Show payment page container
+    const paymentPageContainer = document.getElementById('payment-page-container');
+    paymentPageContainer.style.display = 'block';
+    
+    // Populate cart items
+    const paymentItems = document.getElementById('payment-items');
+    paymentItems.innerHTML = '';
+    
+    let total = 0;
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <div class="cart-item-info">
+                <div class="cart-item-title">${item.title} (x${item.quantity})</div>
+            </div>
+            <div class="cart-item-price price">${itemTotal}</div>
+        `;
+        paymentItems.appendChild(cartItem);
+    });
+    
+    document.getElementById('payment-total').textContent = `₹${total}`;
+    
+    // Reset to step 1
+    document.getElementById('step1').classList.add('active');
+    document.getElementById('step1').classList.remove('completed');
+    document.getElementById('step2').classList.remove('active', 'completed');
+    document.getElementById('step3').classList.remove('active', 'completed');
+    
+    document.getElementById('user-details-form').style.display = 'block';
+    document.getElementById('qr-payment-section').style.display = 'none';
+    document.getElementById('order-complete-section').style.display = 'none';
 });
 
 // Close cart modal
-closeCart.addEventListener('click', function () {
+closeCart.addEventListener('click', function() {
     cartModal.style.display = 'none';
 });
 
 // Close modal on outside click
-window.addEventListener('click', function (e) {
+window.addEventListener('click', function(e) {
     if (e.target === cartModal) {
         cartModal.style.display = 'none';
     }
 });
 
 // Checkout button logic
-checkoutBtn.addEventListener('click', function () {
-    paymentPage.style.display = 'block';
+checkoutBtn.addEventListener('click', function() {
+    populateCartModal();
     cartModal.style.display = 'none';
-
+    
+    // Show payment page container
+    const paymentPageContainer = document.getElementById('payment-page-container');
+    paymentPageContainer.style.display = 'block';
+    
     // Scroll to payment page
     setTimeout(() => {
-        paymentPage.scrollIntoView({ behavior: 'smooth' });
+        paymentPageContainer.scrollIntoView({ behavior: 'smooth' });
     }, 10);
 });
 
-                // Show payment page with cart items
-                paymentItems.innerHTML = '';
-                
-                let total = 0;
-                cart.forEach(item => {
-                    const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
-                    
-                    const cartItem = document.createElement('div');
-                    cartItem.className = 'cart-item';
-                    cartItem.innerHTML = `
-                        <div class="cart-item-info">
-                            <div class="cart-item-title">${item.title} (x${item.quantity})</div>
-                        </div>
-                        <div class="cart-item-price price">${itemTotal}</div>
-                    `;
-                    paymentItems.appendChild(cartItem);
-                });
-                
-                paymentTotal.textContent = total;
-                paymentPage.style.display = 'block';
-                
-                // Scroll to payment page
-                setTimeout(() => {
-                    paymentPage.scrollIntoView({ behavior: 'smooth' });
-                }, 10);
-            });
-            
-            wishlistIcon.addEventListener('click', function() {
-                if (wishlist.length === 0) {
-                    showAlert('Your wishlist is empty!');
-                    return;
-                }
-                
-                const wishlistProducts = products.filter(p => wishlist.includes(p.id));
-                renderProducts(wishlistProducts);
-                searchInput.value = 'Wishlist Items';
-                
-                // Scroll to products
-                setTimeout(() => {
-                    document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
-                }, 10);
-            });
-            
-            searchButton.addEventListener('click', searchProducts);
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    searchProducts();
-                }
-            });
-            
-            closeModal.addEventListener('click', function() {
-                productModal.style.display = 'none';
-            });
-            
-            window.addEventListener('click', function(e) {
-                if (e.target === productModal) {
-                    productModal.style.display = 'none';
-                }
-            });
-            
-            backToShop.addEventListener('click', function() {
-                paymentPage.style.display = 'none';
-                cart = [];
-                updateCartCount();
-                
-                // Reset payment steps
-                step1.classList.add('active');
-                step1.classList.remove('completed');
-                step2.classList.remove('active', 'completed');
-                step3.classList.remove('active', 'completed');
-                
-                // Show user details form and hide others
-                userDetailsForm.style.display = 'block';
-                qrPaymentSection.style.display = 'none';
-                orderCompleteSection.style.display = 'none';
-            });
-            
-            // Form submission
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Get form values
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('emailid').value;
-                const mobile = document.getElementById('mobile').value;
-                
-                // Validate form
-                if (!name || !email || !mobile) {
-                    showAlert('Please fill all fields!');
-                    return;
-                }
-                
-                if (!/^\d{10}$/.test(mobile)) {
-                    showAlert('Please enter a valid 10-digit mobile number!');
-                    return;
-                }
-                
-                // Display user details in payment section
-                displayName.textContent = name;
-                displayEmail.textContent = email;
-                displayMobile.textContent = mobile;
-                confirmationEmail.textContent = email;
-                
-                // Move to next step
-                step1.classList.remove('active');
-                step1.classList.add('completed');
-                step2.classList.add('active');
-                
-                // Hide user details form and show payment section
-                userDetailsForm.style.display = 'none';
-                qrPaymentSection.style.display = 'block';
-                
-                // Scroll to top of payment section
-                setTimeout(() => {
-                    qrPaymentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 10);
-            });
-            
-            // Complete order button
-            completeOrderBtn.addEventListener('click', function() {
-                // Get form values
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('emailid').value;
-                const mobile = document.getElementById('mobile').value;
-                
-                // Calculate total
-                let total = 0;
-                const orderItems = [];
-                cart.forEach(item => {
-                    const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
-                    orderItems.push({
-                        product: item.title,
-                        quantity: item.quantity,
-                        price: item.price
-                    });
-                });
-                
-                // Save order to Firebase
-                saveOrder(name, email, mobile, total, orderItems);
-                
-                // Move to final step
-                step2.classList.remove('active');
-                step2.classList.add('completed');
-                step3.classList.add('active');
-                
-                // Hide payment section and show completion section
-                qrPaymentSection.style.display = 'none';
-                orderCompleteSection.style.display = 'block';
-                
-                // Scroll to top of completion section
-                setTimeout(() => {
-                    orderCompleteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 10);
-            });
-            
-            // Save order to Firebase
-            function saveOrder(name, email, mobile, total, items) {
-                const newOrderRef = contactFormDB.push();
-                
-                newOrderRef.set({
-                    name: name,
-                    email: email,
-                    mobile: mobile,
-                    total: total,
-                    items: items,
-                    timestamp: firebase.database.ServerValue.TIMESTAMP
-                }).then(() => {
-                    console.log('Order saved successfully');
-                }).catch((error) => {
-                    console.error('Error saving order:', error);
-                });
-            }
-            
-            // Initialize the app
-            init();
+// Add event listener for closing payment page
+document.getElementById('close-payment-page').addEventListener('click', function() {
+    document.getElementById('payment-page-container').style.display = 'none';
+});
+
+wishlistIcon.addEventListener('click', function() {
+    if (wishlist.length === 0) {
+        showAlert('Your wishlist is empty!');
+        return;
+    }
+    
+    const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+    renderProducts(wishlistProducts);
+    searchInput.value = 'Wishlist Items';
+    
+    // Scroll to products
+    setTimeout(() => {
+        document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+    }, 10);
+});
+
+searchButton.addEventListener('click', searchProducts);
+searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        searchProducts();
+    }
+});
+
+closeModal.addEventListener('click', function() {
+    productModal.style.display = 'none';
+});
+
+window.addEventListener('click', function(e) {
+    if (e.target === productModal) {
+        productModal.style.display = 'none';
+    }
+});
+
+// Modify the back-to-shop button
+document.getElementById('back-to-shop').addEventListener('click', function() {
+    document.getElementById('payment-page-container').style.display = 'none';
+    cart = [];
+    updateCartCount();
+    
+    // Reset payment steps
+    document.getElementById('step1').classList.add('active');
+    document.getElementById('step1').classList.remove('completed');
+    document.getElementById('step2').classList.remove('active', 'completed');
+    document.getElementById('step3').classList.remove('active', 'completed');
+    
+    // Show user details form and hide others
+    document.getElementById('user-details-form').style.display = 'block';
+    document.getElementById('qr-payment-section').style.display = 'none';
+    document.getElementById('order-complete-section').style.display = 'none';
+});
+
+// Form submission
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('emailid').value;
+    const mobile = document.getElementById('mobile').value;
+    
+    // Validate form
+    if (!name || !email || !mobile) {
+        showAlert('Please fill all fields!');
+        return;
+    }
+    
+    if (!/^\d{10}$/.test(mobile)) {
+        showAlert('Please enter a valid 10-digit mobile number!');
+        return;
+    }
+    
+    // Display user details in payment section
+    displayName.textContent = name;
+    displayEmail.textContent = email;
+    displayMobile.textContent = mobile;
+    confirmationEmail.textContent = email;
+    
+    // Move to next step
+    step1.classList.remove('active');
+    step1.classList.add('completed');
+    step2.classList.add('active');
+    
+    // Hide user details form and show payment section
+    userDetailsForm.style.display = 'none';
+    qrPaymentSection.style.display = 'block';
+    
+    // Scroll to top of payment section
+    setTimeout(() => {
+        qrPaymentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 10);
+});
+
+// Complete order button
+completeOrderBtn.addEventListener('click', function() {
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('emailid').value;
+    const mobile = document.getElementById('mobile').value;
+    
+    // Calculate total
+    let total = 0;
+    const orderItems = [];
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        orderItems.push({
+            product: item.title,
+            quantity: item.quantity,
+            price: item.price
+        });
+    });
+    
+    // Save order to Firebase
+    saveOrder(name, email, mobile, total, orderItems);
+    
+    // Move to final step
+    step2.classList.remove('active');
+    step2.classList.add('completed');
+    step3.classList.add('active');
+    
+    // Hide payment section and show completion section
+    qrPaymentSection.style.display = 'none';
+    orderCompleteSection.style.display = 'block';
+    
+    // Scroll to top of completion section
+    setTimeout(() => {
+        orderCompleteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 10);
+});
+
+// Save order to Firebase
+function saveOrder(name, email, mobile, total, items) {
+    const newOrderRef = contactFormDB.push();
+    
+    newOrderRef.set({
+        name: name,
+        email: email,
+        mobile: mobile,
+        total: total,
+        items: items,
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+    }).then(() => {
+        console.log('Order saved successfully');
+    }).catch((error) => {
+        console.error('Error saving order:', error);
+    });
+}
+
+// Initialize the app
+init();
         });
     </script>
 </body>
