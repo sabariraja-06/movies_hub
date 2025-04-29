@@ -1020,6 +1020,298 @@ body {
             font-weight: bold;
             font-size: 18px;
         }
+         /* AI Assistant Styles */
+    .ai-assistant-icon {
+        position: relative;
+        cursor: pointer;
+        font-size: 20px;
+        transition: all 0.3s ease;
+        color: var(--text-light);
+        margin-left: 20px;
+    }
+    
+    .ai-assistant-icon:hover {
+        transform: scale(1.1);
+        color: var(--accent);
+    }
+    
+    .ai-assistant-modal {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 350px;
+        max-height: 600px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        overflow: hidden;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .ai-assistant-modal.active {
+        display: block;
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .ai-modal-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .close-ai-modal {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        cursor: pointer;
+        color: var(--secondary);
+        transition: all 0.3s ease;
+    }
+    
+    .close-ai-modal:hover {
+        color: var(--accent);
+        transform: rotate(90deg);
+    }
+    
+    .ai-header {
+        padding: 15px;
+        background: linear-gradient(to right, var(--gradient-1), var(--gradient-2));
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .ai-header h3 {
+        margin: 0;
+        font-size: 16px;
+    }
+    
+    .ai-status {
+        font-size: 12px;
+        background-color: var(--success);
+        padding: 3px 8px;
+        border-radius: 10px;
+    }
+    
+    .ai-conversation {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        max-height: 400px;
+        background-color: #f9f9f9;
+    }
+    
+    .ai-message {
+        display: flex;
+        margin-bottom: 15px;
+    }
+    
+    .ai-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: bold;
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+    
+    .ai-text {
+        background-color: white;
+        padding: 10px 15px;
+        border-radius: 10px;
+        max-width: 80%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .user-message .ai-avatar {
+        background-color: var(--accent);
+    }
+    
+    .user-message {
+        flex-direction: row-reverse;
+    }
+    
+    .user-message .ai-text {
+        background-color: var(--light);
+    }
+    
+    .ai-input-container {
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid #eee;
+    }
+    
+    #ai-user-input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        outline: none;
+    }
+    
+    #ai-user-input:focus {
+        border-color: var(--accent);
+    }
+    
+    #ai-send-button, #ai-voice-button {
+        background: none;
+        border: none;
+        color: var(--primary);
+        cursor: pointer;
+        margin-left: 5px;
+        transition: all 0.3s ease;
+    }
+    
+    #ai-send-button:hover, #ai-voice-button:hover {
+        color: var(--accent);
+        transform: scale(1.1);
+    }
+    
+    .ai-suggestions {
+        padding: 10px;
+        border-top: 1px solid #eee;
+    }
+    
+    .ai-suggestions p {
+        margin: 0 0 8px 0;
+        font-size: 12px;
+        color: var(--secondary);
+    }
+    
+    .suggestion-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .suggestion-btn {
+        background-color: var(--light);
+        border: none;
+        border-radius: 15px;
+        padding: 5px 10px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .suggestion-btn:hover {
+        background-color: var(--primary);
+        color: white;
+    }
+    
+    /* Typing indicator */
+    .typing-indicator {
+        display: inline-block;
+    }
+    
+    .typing-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--secondary);
+        margin-right: 3px;
+        animation: typingAnimation 1.4s infinite both;
+    }
+    
+    .typing-dot:nth-child(1) {
+        animation-delay: 0s;
+    }
+    
+    .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    
+    .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    
+    @keyframes typingAnimation {
+        0%, 60%, 100% { transform: translateY(0); }
+        30% { transform: translateY(-5px); }
+    }
+    
+    /* Pulse animation for assistant icon */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+    .ai-assistant-modal {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    max-height: 600px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.ai-assistant-modal.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.quick-action {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 5px 5px 5px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+}
+.quick-action:hover {
+    background-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
     </style>
 </head>
 <body>
@@ -1057,6 +1349,9 @@ body {
                 <div class="cart-icon" id="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
+                </div>
+                <div class="ai-assistant-icon" id="ai-assistant-icon">
+                    <i class="fas fa-robot"></i>
                 </div>
             </div>
         </div>
@@ -1223,6 +1518,36 @@ body {
             <div class="product-price" style="font-size: 20px;">Price: <span class="price" id="modal-price"></span></div>
         </div>
     </div>
+    <div class="ai-assistant-modal" id="ai-assistant-modal">
+        <div class="ai-modal-content">
+            <span class="close-ai-modal">&times;</span>
+            <div class="ai-header">
+                <h3>Zapsters AI Assistant</h3>
+                <div class="ai-status" id="ai-status">Online</div>
+            </div>
+            <div class="ai-conversation" id="ai-conversation">
+                <div class="ai-message">
+                    <div class="ai-avatar">AI</div>
+                    <div class="ai-text">Hello! I'm your shopping assistant. How can I help you today?</div>
+                </div>
+            </div>
+            <div class="ai-input-container">
+                <input type="text" id="ai-user-input" placeholder="Ask me anything about our products..." autocomplete="off">
+                <button id="ai-send-button"><i class="fas fa-paper-plane"></i></button>
+                <button id="ai-voice-button"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="ai-suggestions">
+                <p>Quick questions:</p>
+                <div class="suggestion-buttons">
+                    <button class="suggestion-btn">What's popular?</button>
+                    <button class="suggestion-btn">Show streaming services</button>
+                    <button class="suggestion-btn">Recommend a VPN</button>
+                    <button class="suggestion-btn">What's your return policy?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     
     <!-- Particles.js library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -2065,6 +2390,904 @@ function saveOrder(name, email, mobile, total, items) {
 // Initialize the app
 init();
         });
+
+        // Enhanced AI Assistant functionality
+
+        // Ultra-Enhanced AI Assistant functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const aiAssistantIcon = document.getElementById('ai-assistant-icon');
+        const aiAssistantModal = document.getElementById('ai-assistant-modal');
+        const closeAiModal = document.querySelector('.close-ai-modal');
+        const aiConversation = document.getElementById('ai-conversation');
+        const aiUserInput = document.getElementById('ai-user-input');
+        const aiSendButton = document.getElementById('ai-send-button');
+        const aiVoiceButton = document.getElementById('ai-voice-button');
+        const suggestionButtons = document.querySelectorAll('.suggestion-btn');
+        
+        // Enhanced conversation context tracking
+        let conversationContext = {
+            lastProductMentioned: null,
+            currentTask: null,
+            userPreferences: {
+                budget: null,
+                interests: [],
+                usagePattern: null
+            },
+            conversationHistory: []
+        };
+
+       // Toggle AI modal with animation
+aiAssistantIcon.addEventListener('click', function() {
+    if (aiAssistantModal.classList.contains('active')) {
+        aiAssistantModal.classList.remove('active');
+        aiAssistantModal.style.opacity = '0';
+        aiAssistantModal.style.transform = 'translateY(20px)';
+    } else {
+        aiAssistantModal.classList.add('active');
+        aiAssistantModal.style.opacity = '1';
+        aiAssistantModal.style.transform = 'translateY(0)';
+        aiUserInput.focus();
+    }
+    aiAssistantIcon.classList.remove('pulse');
+});
+       // Close AI modal with animation
+closeAiModal.addEventListener('click', function() {
+    aiAssistantModal.classList.remove('active');
+    aiAssistantModal.style.opacity = '0';
+    aiAssistantModal.style.transform = 'translateY(20px)';
+});
+
+        // Add pulse animation to attract attention
+        setTimeout(() => {
+            if (!aiAssistantModal.classList.contains('active')) {
+                aiAssistantIcon.classList.add('pulse');
+            }
+        }, 15000);
+
+        // Function to add message to conversation with animation
+        function addMessage(text, isUser = false, isHTML = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `ai-message ${isUser ? 'user-message' : ''}`;
+            messageDiv.style.opacity = '0';
+            messageDiv.style.transform = isUser ? 'translateX(20px)' : 'translateX(-20px)';
+            messageDiv.style.animation = `${isUser ? 'slideInRight' : 'slideInLeft'} 0.3s ease forwards`;
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'ai-avatar';
+            avatarDiv.textContent = isUser ? 'You' : 'AI';
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'ai-text';
+            
+            if (isHTML) {
+                textDiv.innerHTML = text;
+            } else {
+                // Add basic markdown-like formatting
+                const formattedText = text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Italics
+                textDiv.innerHTML = formattedText;
+            }
+            
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(textDiv);
+            
+            aiConversation.appendChild(messageDiv);
+            aiConversation.scrollTop = aiConversation.scrollHeight;
+            
+            // Add to conversation history
+            conversationContext.conversationHistory.push({
+                text: text,
+                isUser: isUser,
+                timestamp: new Date().toISOString()
+            });
+        }
+
+        // Function to show typing indicator
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'ai-message';
+            typingDiv.style.opacity = '0';
+            typingDiv.style.animation = 'fadeIn 0.3s ease forwards';
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'ai-avatar';
+            avatarDiv.textContent = 'AI';
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'ai-text typing-indicator';
+            textDiv.innerHTML = `
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            `;
+            
+            typingDiv.appendChild(avatarDiv);
+            typingDiv.appendChild(textDiv);
+            
+            aiConversation.appendChild(typingDiv);
+            aiConversation.scrollTop = aiConversation.scrollHeight;
+            
+            return typingDiv;
+        }
+
+        // Ultra-detailed product information database
+        const productDetails = {
+            // Amazon Prime
+            1: {
+                description: "Amazon Prime Video is a premium streaming service offering a vast library of movies, TV shows, and award-winning original content.",
+                features: [
+                    "6-month subscription package (best value)",
+                    "Access to 20,000+ movies and TV shows",
+                    "Prime Originals like The Boys, The Marvelous Mrs. Maisel, and Jack Ryan",
+                    "Simultaneous streaming on 3 devices",
+                    "Download up to 25 titles for offline viewing",
+                    "4K Ultra HD, HDR10+, and Dolby Atmos support",
+                    "X-Ray feature for actor and song information",
+                    "Free shipping benefits on Amazon.in orders"
+                ],
+                benefits: [
+                    "Ad-free streaming experience",
+                    "New content added weekly (typically 50+ new titles)",
+                    "Access to Prime Music (2 million songs) and Prime Reading (1000+ books)",
+                    "Parental controls with PIN protection",
+                    "Watch Party feature for synchronized viewing with friends"
+                ],
+                technical: {
+                    resolution: "Up to 4K UHD",
+                    audio: "Dolby Digital Plus, Dolby Atmos",
+                    devices: ["Smart TVs", "Fire TV", "Game Consoles", "iOS/Android", "Web Browsers"],
+                    internet: "Minimum 5 Mbps for HD, 25 Mbps for 4K"
+                },
+                limitations: "Some content may have geographic restrictions. Live sports not included.",
+                faq: [
+                    "Q: Can I share my account? A: Yes, with up to 2 other household members",
+                    "Q: Is there a free trial? A: Yes, 30-day trial available for new users",
+                    "Q: How often is content updated? A: New titles added every Tuesday"
+                ]
+            },
+            // Netflix
+            2: {
+                description: "Netflix is the world's leading streaming entertainment service with award-winning series, films, and documentaries.",
+                features: [
+                    "1-month premium subscription (4-screen plan)",
+                    "Unlimited ad-free access to entire library",
+                    "Download on up to 4 mobile devices",
+                    "4K Ultra HD with Dolby Vision and Dolby Atmos",
+                    "Personalized recommendations based on viewing history",
+                    "Kids profile with parental controls",
+                    "Interactive content (like Black Mirror: Bandersnatch)"
+                ],
+                popularContent: {
+                    originals: ["Stranger Things", "The Crown", "Bridgerton", "The Witcher"],
+                    movies: ["Red Notice", "Don't Look Up", "Extraction"],
+                    anime: ["Arcane", "Castlevania", "The Way of the Househusband"]
+                },
+                technical: {
+                    resolution: "Up to 4K UHD with HDR",
+                    audio: "Dolby Atmos, 5.1 surround sound",
+                    devices: ["6000+ supported devices including smart TVs and game consoles"],
+                    internet: "5 Mbps for HD, 25 Mbps for Ultra HD"
+                },
+                regionalInfo: {
+                    india: {
+                        price: "₹649/month for Premium",
+                        localContent: "100+ Indian titles including Sacred Games and Lust Stories"
+                    }
+                }
+            },
+            // Add similarly detailed info for all other products...
+        };
+
+        // Enhanced AI response function with natural language processing
+        function getAIResponse(userInput) {
+            const input = userInput.toLowerCase();
+            conversationContext.conversationHistory.push({text: userInput, isUser: true});
+            
+            // Detect user intent
+            const intent = detectIntent(input);
+            
+            // Handle greetings
+            if (intent === 'greeting') {
+                const greetings = [
+                    `Hello there! 👋 I'm Zapster, your personal shopping assistant. I can help you find the perfect digital subscriptions, compare options, and even guide you through purchases. What brings you here today?`,
+                    `Hi! I'm Zapster, your AI shopping helper. I know all about our products and can help you choose the best options. How can I assist you?`,
+                    `Welcome! 🤖 I'm Zapster, here to make your shopping experience smooth. Need recommendations, product details, or help with a purchase?`
+                ];
+                return greetings[Math.floor(Math.random() * greetings.length)];
+            }
+            
+            // Handle product-specific queries
+            if (intent === 'product_query') {
+                const product = identifyProduct(input);
+                if (product) {
+                    conversationContext.lastProductMentioned = product.id;
+                    return generateProductResponse(product);
+                }
+            }
+            
+            // Handle comparisons
+            if (intent === 'comparison') {
+                return handleComparisonRequest(input);
+            }
+            
+            // Handle purchase-related questions
+            if (intent === 'purchase') {
+                return handlePurchaseQuestions(input);
+            }
+            
+            // Handle technical support
+            if (intent === 'support') {
+                return handleSupportQuestions(input);
+            }
+            
+            // Handle recommendations
+            if (intent === 'recommendation') {
+                return generateRecommendations(input);
+            }
+            
+            // Handle account questions
+            if (intent === 'account') {
+                return `I can help with account-related questions:\n\n` +
+                       `• **Login issues**: Try resetting your password or contact support@zapsters.com\n` +
+                       `• **Account security**: Enable 2FA in your account settings\n` +
+                       `• **Profile management**: Update your details in the 'My Account' section\n\n` +
+                       `What specific account issue are you facing?`;
+            }
+            
+            // Handle payment questions
+            if (intent === 'payment') {
+                return `**Payment Options**:\n\n` +
+                       `💳 **Credit/Debit Cards**: Visa, Mastercard, Amex, RuPay\n` +
+                       `📱 **UPI**: Instant payments via PhonePe, GPay, Paytm\n` +
+                       `🏦 **Net Banking**: 50+ supported banks\n` +
+                       `💰 **Wallets**: Paytm, Amazon Pay, Mobikwik\n` +
+                       `🔒 All transactions are secured with 256-bit SSL encryption\n\n` +
+                       `Need help with a specific payment method or having issues?`;
+            }
+            
+            // Handle refund questions
+            if (intent === 'refund') {
+                return `**Our Refund Policy**:\n\n` +
+                       `↩️ **7-day money back guarantee** on all digital products\n` +
+                       `⏳ Refunds processed within 3-5 business days\n` +
+                       `📧 Contact support@zapsters.com with your order ID\n` +
+                       `❗ Refund eligibility requires product to be unused\n\n` +
+                       `Would you like help initiating a refund?`;
+            }
+            
+            // Handle gift questions
+            if (intent === 'gift') {
+                return `**Gifting Digital Subscriptions**:\n\n` +
+                       `1. Select your desired product\n` +
+                       `2. Click 'Buy as Gift' during checkout\n` +
+                       `3. Enter recipient's email and delivery date\n` +
+                       `4. Add a personalized message (optional)\n` +
+                       `5. Complete payment\n\n` +
+                       `🎁 The recipient receives a beautiful e-gift email with redemption instructions\n` +
+                       `💝 Perfect for birthdays, anniversaries, or just because!\n\n` +
+                       `Need help selecting a gift? I can recommend popular choices.`;
+            }
+            
+            // Handle thank you responses
+            if (intent === 'thanks') {
+                const thanksResponses = [
+                    "You're very welcome! 😊 Is there anything else I can help you with?",
+                    "Happy to help! 💖 Don't hesitate to ask if you have more questions.",
+                    "My pleasure! 🎉 Remember I'm here anytime you need shopping assistance."
+                ];
+                return thanksResponses[Math.floor(Math.random() * thanksResponses.length)];
+            }
+            
+            // Handle goodbye
+            if (intent === 'goodbye') {
+                const goodbyeResponses = [
+                    "Goodbye! 👋 Come back anytime you need help with your digital subscriptions.",
+                    "Thanks for chatting! 💻 Remember, I'm here 24/7 if you need assistance.",
+                    "Have a great day! 🌟 Don't hesitate to return if you have more questions."
+                ];
+                return goodbyeResponses[Math.floor(Math.random() * goodbyeResponses.length)];
+            }
+            
+            // Fallback with contextual awareness
+            if (conversationContext.lastProductMentioned) {
+                const product = products.find(p => p.id === conversationContext.lastProductMentioned);
+                return `I'm not entirely sure what you're asking about ${product.title}. Could you rephrase or ask about:\n\n` +
+                       `• Specific features\n` +
+                       `• Pricing details\n` +
+                       `• How it compares to other products\n` +
+                       `• Purchase process`;
+            }
+            
+            // Final fallback with helpful suggestions
+            return `I want to make sure I understand correctly. Could you:\n\n` +
+                   `1. Rephrase your question\n` +
+                   `2. Ask about specific products\n` +
+                   `3. Tell me what you're looking for\n\n` +
+                   `For example, you could ask:\n` +
+                   `• "What's the difference between Netflix and Amazon Prime?"\n` +
+                   `• "Can you recommend a good VPN?"\n` +
+                   `• "How do I purchase a subscription as a gift?"`;
+        }
+
+        // Intent detection function
+        function detectIntent(input) {
+            if (/hello|hi|hey|greetings/i.test(input)) return 'greeting';
+            if (/prime|netflix|vpn|canva|figma|youtube|hotstar|zee|crunchyroll|subscription|plan|service/i.test(input)) return 'product_query';
+            if (/compare|difference|vs|versus|better|which one/i.test(input)) return 'comparison';
+            if (/buy|purchase|checkout|order|get|add to cart/i.test(input)) return 'purchase';
+            if (/support|help|problem|issue|not working|error/i.test(input)) return 'support';
+            if (/recommend|suggest|which should|what's good|best for/i.test(input)) return 'recommendation';
+            if (/account|login|sign in|password|profile/i.test(input)) return 'account';
+            if (/payment|pay|credit card|debit|upi|wallet|net banking/i.test(input)) return 'payment';
+            if (/refund|return|cancel|money back/i.test(input)) return 'refund';
+            if (/gift|present|someone else|for friend/i.test(input)) return 'gift';
+            if (/thank|thanks|appreciate/i.test(input)) return 'thanks';
+            if (/bye|goodbye|see you|later/i.test(input)) return 'goodbye';
+            return 'unknown';
+        }
+
+        // Product identification function
+        function identifyProduct(input) {
+            const productMap = {
+                'prime|amazon': 1,
+                'netflix': 2,
+                'crunchyroll|anime': 3,
+                'hotstar|disney': 4,
+                'youtube|yt premium': 5,
+                'zee5': 6,
+                'canva': 7,
+                'figma': 8,
+                'chatgpt|openai': 9,
+                'vpn|surfshark|express|nord': [10,11,12]
+            };
+            
+            for (const [keywords, id] of Object.entries(productMap)) {
+                const regex = new RegExp(keywords, 'i');
+                if (regex.test(input)) {
+                    if (Array.isArray(id)) {
+                        // Return the highest rated product in this category
+                        return products.filter(p => id.includes(p.id))
+                                       .sort((a,b) => b.rating - a.rating)[0];
+                    }
+                    return products.find(p => p.id === id);
+                }
+            }
+            return null;
+        }
+
+        // Generate detailed product response
+        function generateProductResponse(product) {
+            const details = productDetails[product.id] || {};
+            let response = `**${product.title}** (₹${product.price}) ★ ${product.rating}/5\n\n`;
+            
+            if (details.description) {
+                response += `${details.description}\n\n`;
+            }
+            
+            // Highlight special offers
+            if (product.badge === 'Sale') {
+                response += `🔥 **Special Offer**: This product is currently on sale!\n\n`;
+            }
+            
+            if (details.features) {
+                response += `**Key Features**:\n`;
+                response += details.features.map(f => `✓ ${f}`).join('\n') + '\n\n';
+            }
+            
+            if (details.benefits) {
+                response += `**Benefits**:\n`;
+                response += details.benefits.map(b => `• ${b}`).join('\n') + '\n\n';
+            }
+            
+            // Add technical specifications if available
+            if (details.technical) {
+                response += `**Technical Details**:\n`;
+                for (const [key, value] of Object.entries(details.technical)) {
+                    response += `▸ ${key.charAt(0).toUpperCase() + key.slice(1)}: ${Array.isArray(value) ? value.join(', ') : value}\n`;
+                }
+                response += '\n';
+            }
+            
+            // Add quick actions
+            response += `**Quick Actions**: \n` +
+                        `• <button class="quick-action" data-action="add-to-cart">Add to Cart</button>\n` +
+                        `• <button class="quick-action" data-action="details">More Details</button>\n` +
+                        `• <button class="quick-action" data-action="compare">Compare</button>\n\n`;
+            
+            response += `Would you like to know more about any specific aspect?`;
+            
+            return response;
+        }
+
+        // Handle comparison requests
+        function handleComparisonRequest(input) {
+            // Extract product names from input
+            const productsToCompare = [];
+            
+            // Check if we have a last mentioned product to compare with
+            if (conversationContext.lastProductMentioned) {
+                productsToCompare.push(products.find(p => p.id === conversationContext.lastProductMentioned));
+            }
+            
+            // Look for other products mentioned in the input
+            const otherProduct = identifyProduct(input);
+            if (otherProduct && (!productsToCompare.length || otherProduct.id !== productsToCompare[0].id)) {
+                productsToCompare.push(otherProduct);
+            }
+            
+            // If we have exactly 2 products to compare
+            if (productsToCompare.length === 2) {
+                return generateComparisonResponse(productsToCompare[0], productsToCompare[1]);
+            }
+            
+            // If we need to identify more products
+            return `I can help compare products. Please specify which products you'd like to compare, for example:\n\n` +
+                   `• "Compare Netflix and Amazon Prime"\n` +
+                   `• "What's better: Surfshark or ExpressVPN?"\n` +
+                   `• "How does Canva compare to Figma?"`;
+        }
+
+        // Generate comparison response
+        function generateComparisonResponse(product1, product2) {
+            const details1 = productDetails[product1.id] || {};
+            const details2 = productDetails[product2.id] || {};
+            
+            let response = `**Comparison: ${product1.title} vs ${product2.title}**\n\n`;
+            
+            // Price comparison
+            response += `**Pricing**:\n`;
+            response += `▸ ${product1.title}: ₹${product1.price}\n`;
+            response += `▸ ${product2.title}: ₹${product2.price}\n\n`;
+            
+            // Rating comparison
+            response += `**Ratings**:\n`;
+            response += `▸ ${product1.title}: ★ ${product1.rating}/5\n`;
+            response += `▸ ${product2.title}: ★ ${product2.rating}/5\n\n`;
+            
+            // Feature comparison
+            response += `**Key Differences**:\n`;
+            
+            // Unique features of product 1
+            if (details1.features) {
+                const uniqueTo1 = details1.features.filter(f => 
+                    !details2.features || !details2.features.some(f2 => f2.includes(f.split(' ')[0]))
+                );
+                if (uniqueTo1.length) {
+                    response += `• Only ${product1.title} offers:\n`;
+                    response += uniqueTo1.map(f => `   - ${f}`).join('\n') + '\n';
+                }
+            }
+            
+            // Unique features of product 2
+            if (details2.features) {
+                const uniqueTo2 = details2.features.filter(f => 
+                    !details1.features || !details1.features.some(f1 => f1.includes(f.split(' ')[0]))
+                );
+                if (uniqueTo2.length) {
+                    response += `• Only ${product2.title} offers:\n`;
+                    response += uniqueTo2.map(f => `   - ${f}`).join('\n') + '\n';
+                }
+            }
+            
+            // Recommendation based on common needs
+            response += `\n**Recommendation**:\n`;
+            if (product1.rating > product2.rating && product1.price <= product2.price) {
+                response += `${product1.title} is generally the better choice with higher rating and competitive pricing.`;
+            } else if (product2.rating > product1.rating && product2.price <= product1.price) {
+                response += `${product2.title} is generally the better choice with higher rating and competitive pricing.`;
+            } else if (product1.price < product2.price) {
+                response += `${product1.title} offers better value for money, while ${product2.title} has more premium features.`;
+            } else {
+                response += `Both have their strengths. ${product1.title} is great for ${details1.features ? details1.features[0].toLowerCase() : 'its features'}, while ${product2.title} excels at ${details2.features ? details2.features[0].toLowerCase() : 'its offerings'}.`;
+            }
+            
+            return response;
+        }
+
+        // Handle purchase-related questions
+        function handlePurchaseQuestions(input) {
+            if (conversationContext.lastProductMentioned) {
+                const product = products.find(p => p.id === conversationContext.lastProductMentioned);
+                return `**Purchasing ${product.title}**:\n\n` +
+                       `1. Click the 'Add to Cart' button below\n` +
+                       `2. Review your cart (top right icon)\n` +
+                       `3. Proceed to checkout\n` +
+                       `4. Enter payment details\n` +
+                       `5. Receive instant activation code\n\n` +
+                       `💳 Multiple payment options available\n` +
+                       `🔒 256-bit SSL secure checkout\n` +
+                       `📧 Instant email delivery\n\n` +
+                       `<button class="quick-action" data-action="add-to-cart">Add ${product.title} to Cart</button>`;
+            }
+            return `I can help you purchase any product. First, please tell me which product you're interested in, or browse our collection above.`;
+        }
+
+        // Handle support questions
+        function handleSupportQuestions(input) {
+            if (/not working|error|problem|issue/i.test(input)) {
+                return `I'm sorry you're experiencing issues. Let's troubleshoot:\n\n` +
+                       `1. Try refreshing the page or restarting the app\n` +
+                       `2. Clear your browser cache/cookies\n` +
+                       `3. Check your internet connection\n` +
+                       `4. Try a different device if possible\n\n` +
+                       `If the problem persists, please contact:\n` +
+                       `📧 support@zapsters.com\n` +
+                       `📞 +91-9876543210 (10AM-7PM IST)\n\n` +
+                       `For faster help, include:\n` +
+                       `• Screenshot of the issue\n` +
+                       `• Device/browser details\n` +
+                       `• Steps to reproduce the problem`;
+            }
+            return `For support, please contact:\n\n` +
+                   `📧 support@zapsters.com\n` +
+                   `📞 +91-9876543210 (10AM-7PM IST)\n\n` +
+                   `Our team typically responds within 2 hours during business days.`;
+        }
+
+        // Generate personalized recommendations
+        function generateRecommendations(input) {
+            // Extract user preferences from input
+            if (/budget|cheap|affordable|price/i.test(input)) {
+                conversationContext.userPreferences.budget = 'low';
+            } else if (/premium|best|high end/i.test(input)) {
+                conversationContext.userPreferences.budget = 'high';
+            }
+            
+            if (/stream|movie|tv|video/i.test(input)) {
+                conversationContext.userPreferences.interests.push('streaming');
+            }
+            
+            if (/vpn|privacy|security|geoblock/i.test(input)) {
+                conversationContext.userPreferences.interests.push('vpn');
+            }
+            
+            if (/design|graphic|template|social media/i.test(input)) {
+                conversationContext.userPreferences.interests.push('design');
+            }
+            
+            if (/family|kids|children/i.test(input)) {
+                conversationContext.userPreferences.usagePattern = 'family';
+            } else if (/business|work|team/i.test(input)) {
+                conversationContext.userPreferences.usagePattern = 'business';
+            }
+            
+            // Generate recommendations based on preferences
+            let filteredProducts = [...products];
+            
+            // Filter by budget if specified
+            if (conversationContext.userPreferences.budget === 'low') {
+                filteredProducts = filteredProducts.filter(p => p.price < 100);
+            } else if (conversationContext.userPreferences.budget === 'high') {
+                filteredProducts = filteredProducts.filter(p => p.price >= 100);
+            }
+            
+            // Filter by interests if specified
+            if (conversationContext.userPreferences.interests.includes('streaming')) {
+                filteredProducts = filteredProducts.filter(p => 
+                    p.title.includes('PRIME') || 
+                    p.title.includes('NETFLIX') || 
+                    p.title.includes('HOTSTAR')
+                );
+            }
+            
+            if (conversationContext.userPreferences.interests.includes('vpn')) {
+                filteredProducts = filteredProducts.filter(p => 
+                    p.title.includes('SURFSHARK') || 
+                    p.title.includes('EXPRESS') || 
+                    p.title.includes('NORD')
+                );
+            }
+            
+            // Sort by relevance
+            filteredProducts.sort((a, b) => b.rating - a.rating);
+            
+            // Generate response
+            if (filteredProducts.length === 0) {
+                return `I couldn't find products matching your criteria. Could you:\n\n` +
+                       `• Increase your budget slightly\n` +
+                       `• Consider more general categories\n` +
+                       `• Or let me know more about what you need?`;
+            }
+            
+            let response = `Based on your preferences, I recommend:\n\n`;
+            
+            // Top 3 recommendations
+            filteredProducts.slice(0, 3).forEach(p => {
+                response += `**${p.title}** (₹${p.price}) ★ ${p.rating}/5\n`;
+                response += `▸ ${productDetails[p.id]?.features?.[0] || 'Popular choice'}\n\n`;
+            });
+            
+            response += `Would you like more details about any of these or see more options?`;
+            
+            return response;
+        }
+
+        // Enhanced process user input with context tracking
+   // Enhanced process user input with context tracking
+function processUserInput() {
+    const userInput = aiUserInput.value.trim();
+    if (!userInput) return;
+    
+    // Add user message to conversation
+    addMessage(userInput, true);
+    aiUserInput.value = '';
+    
+    // Show typing indicator
+    const typingIndicator = showTypingIndicator();
+    
+    // Simulate AI thinking time
+    setTimeout(() => {
+        removeTypingIndicator(typingIndicator);
+        
+        // Get AI response
+        const aiResponse = getAIResponse(userInput);
+        
+        // Add AI response to conversation
+        addMessage(aiResponse, false, true);
+        
+        // Add event listeners to any quick action buttons
+        setTimeout(() => {
+            document.querySelectorAll('.quick-action').forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    const product = conversationContext.lastProductMentioned ? 
+                        products.find(p => p.id === conversationContext.lastProductMentioned) : null;
+                    
+                    if (action === 'add-to-cart' && product) {
+                        addToCart(product.id);
+                        addMessage(`Added ${product.title} to your cart!`, false);
+                    } else if (action === 'details' && product) {
+                        showProductDetails(product.id);
+                    } else if (action === 'compare' && product) {
+                        addMessage(`What would you like to compare ${product.title} with?`, false);
+                    }
+                });
+            });
+        }, 100);
+    }, 800 + Math.random() * 1200); // More natural response time
+}
+
+        // Send message on button click
+        aiSendButton.addEventListener('click', processUserInput);
+        
+        // Send message on Enter key
+        aiUserInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                processUserInput();
+            }
+        });
+        
+        // Enhanced voice input functionality
+        aiVoiceButton.addEventListener('click', function() {
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.lang = 'en-IN'; // India-specific
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 3;
+                
+                recognition.onstart = function() {
+                    aiVoiceButton.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+                    aiVoiceButton.style.color = 'var(--accent)';
+                    addMessage("🎤 Listening... Please speak now", false);
+                };
+                
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    addMessage(transcript, true);
+                    
+                    // Show typing indicator
+                    const typingIndicator = showTypingIndicator();
+                    
+                    setTimeout(() => {
+                        removeTypingIndicator(typingIndicator);
+                        const aiResponse = getAIResponse(transcript);
+                        addMessage(aiResponse, false, true);
+                    }, 800);
+                };
+                
+                recognition.onerror = function(event) {
+                    const errors = {
+                        'no-speech': "I didn't hear anything. Please try again.",
+                        'audio-capture': "Microphone not available. Please check your device settings.",
+                        'not-allowed': "Microphone access denied. Please enable permissions."
+                    };
+                    addMessage(errors[event.error] || "Sorry, I couldn't understand that. Please try again.", false);
+                };
+                
+                recognition.onend = function() {
+                    aiVoiceButton.innerHTML = '<i class="fas fa-microphone"></i>';
+                    aiVoiceButton.style.color = '';
+                };
+                
+                recognition.start();
+            } else {
+                addMessage("Voice input isn't supported in your browser. Please type your question.", false);
+            }
+        });
+        
+        // Suggestion button clicks with more context
+        suggestionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const suggestion = this.textContent;
+                addMessage(suggestion, true);
+                
+                // Show typing indicator
+                const typingIndicator = showTypingIndicator();
+                
+                setTimeout(() => {
+                    removeTypingIndicator(typingIndicator);
+                    const aiResponse = getAIResponse(suggestion);
+                    addMessage(aiResponse, false, true);
+                }, 800);
+            });
+        });
+        
+        // Initial proactive messages
+        const proactiveMessages = [
+            "Need help choosing between streaming services? I can compare Netflix, Prime, and Hotstar for you!",
+            "🎁 Did you know you can gift subscriptions? Ask me how to send the perfect digital gift.",
+            "Our VPN deals are ending soon! Get 20% off Surfshark and ExpressVPN this week."
+        ];
+        
+        setTimeout(() => {
+            if (!aiAssistantModal.classList.contains('active')) {
+                const randomMessage = proactiveMessages[Math.floor(Math.random() * proactiveMessages.length)];
+                addMessage(randomMessage, false);
+            }
+        }, 30000);
+        
+        // Add animations to styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+            
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-20px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(20px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            
+            .quick-action {
+                background-color: var(--primary);
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 5px 10px;
+                margin: 5px 5px 5px 0;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 12px;
+            }
+            .quick-action:hover {
+                background-color: var(--accent);
+                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            }
+            
+            strong {
+                font-weight: bold;
+                color: var(--accent);
+            }
+            
+            em {
+                font-style: italic;
+            }
+        `;
+        document.head.appendChild(style);
+    });
+    // Function to remove typing indicator
+function removeTypingIndicator(indicator) {
+    indicator.style.animation = 'fadeOut 0.3s ease forwards';
+    setTimeout(() => {
+        indicator.remove();
+    }, 300);
+}
+
+// Function to add to cart from AI
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            ...product,
+            quantity: 1
+        });
+    }
+    
+    updateCartCount();
+    showAlert(`${product.title} added to cart!`);
+}
+// Send message on button click
+aiSendButton.addEventListener('click', processUserInput);
+
+// Send message on Enter key
+aiUserInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        processUserInput();
+    }
+});
+
+// Voice input functionality
+aiVoiceButton.addEventListener('click', function() {
+    if ('webkitSpeechRecognition' in window) {
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'en-IN';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 3;
+        
+        recognition.onstart = function() {
+            aiVoiceButton.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+            aiVoiceButton.style.color = 'var(--accent)';
+            addMessage("🎤 Listening... Please speak now", false);
+        };
+        
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            addMessage(transcript, true);
+            
+            // Show typing indicator
+            const typingIndicator = showTypingIndicator();
+            
+            setTimeout(() => {
+                removeTypingIndicator(typingIndicator);
+                const aiResponse = getAIResponse(transcript);
+                addMessage(aiResponse, false, true);
+            }, 800);
+        };
+        
+        recognition.onerror = function(event) {
+            const errors = {
+                'no-speech': "I didn't hear anything. Please try again.",
+                'audio-capture': "Microphone not available. Please check your device settings.",
+                'not-allowed': "Microphone access denied. Please enable permissions."
+            };
+            addMessage(errors[event.error] || "Sorry, I couldn't understand that. Please try again.", false);
+        };
+        
+        recognition.onend = function() {
+            aiVoiceButton.innerHTML = '<i class="fas fa-microphone"></i>';
+            aiVoiceButton.style.color = '';
+        };
+        
+        recognition.start();
+    } else {
+        addMessage("Voice input isn't supported in your browser. Please type your question.", false);
+    }
+});
+
+// Suggestion button clicks
+document.querySelectorAll('.suggestion-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const suggestion = this.textContent;
+        addMessage(suggestion, true);
+        
+        // Show typing indicator
+        const typingIndicator = showTypingIndicator();
+        
+        setTimeout(() => {
+            removeTypingIndicator(typingIndicator);
+            const aiResponse = getAIResponse(suggestion);
+            addMessage(aiResponse, false, true);
+        }, 800);
+    });
+});
     </script>
 </body>
 </html>
