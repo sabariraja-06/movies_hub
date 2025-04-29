@@ -1397,7 +1397,7 @@ body {
                 {
                     id: 3,
                     title: "CRUNCHYROLL",
-                    price: 60,
+                    price: 59,
                     image: "https://moviehub07.neocities.org/zap/images/cr.jpg",
                     rating: 4,
                     badge: "Sale",
@@ -1414,7 +1414,7 @@ body {
                 {
                     id: 4,
                     title: "HOTSTAR",
-                    price: 50,
+                    price:  49,
                     image: "https://moviehub07.neocities.org/zap/images/hotstar.jpg",
                     rating: 4,
                     featured: true,
@@ -1431,7 +1431,7 @@ body {
                 {
                     id: 5,
                     title: "YOU TUBE PREMIUM",
-                    price: 50,
+                    price: 49,
                     image: "https://moviehub07.neocities.org/zap/images/yt.jpg",
                     rating: 5,
                     badge: "Trending",
@@ -1448,7 +1448,7 @@ body {
                 {
                     id: 6,
                     title: "ZEE5",
-                    price: 50,
+                    price: 49,
                     image: "https://moviehub07.neocities.org/zap/images/Zee5-logo.jpg",
                     rating: 4,
                     description: "ZEE5 is an Indian subscription video-on-demand and over-the-top streaming service with content in multiple languages.",
@@ -2045,9 +2045,18 @@ function saveOrder(name, email, mobile, total, items) {
         mobile: mobile,
         total: total,
         items: items,
-        timestamp: firebase.database.ServerValue.TIMESTAMP
+        timestamp: firebase.database.ServerValue.TIMESTAMP,
+        date: new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        })
     }).then(() => {
-        console.log('Order saved successfully');
+        console.log('Order saved successfully with timestamp');
     }).catch((error) => {
         console.error('Error saving order:', error);
     });
