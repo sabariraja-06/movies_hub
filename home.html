@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- Replace your current viewport meta tag with this -->
-<meta name="viewport" content="width=1200, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=1200, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>My E-Commerce Store</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1312,6 +1312,136 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+/* Add this to your existing CSS */
+body {
+    min-width: 1200px;
+    overflow-x: auto;
+}
+
+.container {
+    min-width: 1200px;
+}
+
+/* Disable responsive styles */
+@media (max-width: 1024px) {
+    .products {
+        grid-template-columns: repeat(3, 1fr) !important; /* Force 3 columns */
+    }
+    
+    .nav-links {
+        gap: 40px !important; /* Keep original gap */
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: row !important; /* Keep horizontal layout */
+        padding: 20px 20px !important;
+    }
+    
+    .nav-container {
+        flex-direction: row !important;
+        margin-top: 0 !important;
+    }
+    
+    .logo {
+        margin-right: 40px !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .nav-links {
+        width: auto !important;
+        justify-content: center !important;
+        margin-bottom: 0 !important;
+        gap: 40px !important;
+    }
+    
+    .icons {
+        margin-left: 40px !important;
+    }
+    
+    .products {
+        grid-template-columns: repeat(3, 1fr) !important; /* Force 3 columns */
+    }
+    
+    .product-image {
+        height: 250px !important; /* Keep original height */
+    }
+    
+    .section-title {
+        font-size: 32px !important; /* Keep original size */
+    }
+}
+@media (max-width: 768px) {
+    #particles-js {
+        display: none; /* Disable particles on mobile */
+    }
+    
+    body {
+        background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+    }
+}
+.product-modal, .ai-assistant-modal, .cart-modal {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+.alert {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    background-color: var(--accent);
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 1001;
+    display: none;
+    animation: slideDown 0.3s ease-out;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@keyframes slideDown {
+    from {
+        top: -50px;
+        opacity: 0;
+    }
+    to {
+        top: 100px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.remove-item {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    align-self: center;
+}
+
+.remove-item:hover {
+    color: #c0392b;
+    transform: scale(1.1);
+}
     </style>
 </head>
 <body>
@@ -2050,22 +2180,24 @@ body {
             
             // Show alert
             function showAlert(message) {
-                const alert = document.createElement('div');
-                alert.className = 'alert';
-                alert.textContent = message;
-                document.body.appendChild(alert);
-                
-                setTimeout(() => {
-                    alert.style.display = 'block';
-                }, 10);
-                
-                setTimeout(() => {
-                    alert.style.opacity = '0';
-                    setTimeout(() => {
-                        alert.remove();
-                    }, 300);
-                }, 3000);
-            }
+    const alert = document.createElement('div');
+    alert.className = 'alert';
+    alert.textContent = message;
+    document.body.appendChild(alert);
+    
+    // Show with animation
+    setTimeout(() => {
+        alert.style.display = 'block';
+    }, 10);
+    
+    // Hide after delay
+    setTimeout(() => {
+        alert.style.animation = 'fadeOut 0.3s ease forwards';
+        setTimeout(() => {
+            alert.remove();
+        }, 300);
+    }, 3000);
+}
             
             // Show product details modal
             function showProductDetails(productId) {
@@ -2136,22 +2268,85 @@ function populateCartModal() {
 
     let total = 0;
 
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
+    // In the cartIcon click event listener where you populate payment items:
+cart.forEach((item, index) => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+    
+    const cartItem = document.createElement('div');
+    cartItem.className = 'cart-item';
+    cartItem.innerHTML = `
+        <div class="cart-item-info">
+            <div class="cart-item-title">${item.title} (x${item.quantity})</div>
+        </div>
+        <div class="cart-item-price price">${itemTotal}</div>
+        <button class="remove-item" data-index="${index}">
+            <i class="fas fa-trash"></i>
+        </button>
+    `;
+    paymentItems.appendChild(cartItem);
+});
 
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-            <div class="cart-item-info">
-                <div class="cart-item-title">${item.title} (x${item.quantity})</div>
-            </div>
-            <div class="cart-item-price price">${itemTotal}</div>
-        `;
-        cartItemsContainer.appendChild(cartItem);
+// Add event listeners to remove buttons in payment page
+document.querySelectorAll('.remove-item').forEach(button => {
+    button.addEventListener('click', function() {
+        const index = parseInt(this.getAttribute('data-index'));
+        removeFromCart(index);
+        
+        // Re-populate payment items after removal
+        const paymentItems = document.getElementById('payment-items');
+        paymentItems.innerHTML = '';
+        
+        let newTotal = 0;
+        cart.forEach((item, idx) => {
+            const itemTotal = item.price * item.quantity;
+            newTotal += itemTotal;
+            
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <div class="cart-item-info">
+                    <div class="cart-item-title">${item.title} (x${item.quantity})</div>
+                </div>
+                <div class="cart-item-price price">${itemTotal}</div>
+                <button class="remove-item" data-index="${idx}">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            paymentItems.appendChild(cartItem);
+        });
+        
+        document.getElementById('payment-total').textContent = `₹${newTotal}`;
+        
+        // Add event listeners again
+        document.querySelectorAll('.remove-item').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const idx = parseInt(this.getAttribute('data-index'));
+                removeFromCart(idx);
+                // You might want to refresh the payment page view here as well
+            });
+        });
     });
+});
 
     cartTotal.textContent = `₹${total}`;
+    
+    // Add event listeners to remove buttons
+    document.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            removeFromCart(index);
+        });
+    });
+}
+function removeFromCart(index) {
+    if (index >= 0 && index < cart.length) {
+        const removedItem = cart[index];
+        cart.splice(index, 1);
+        updateCartCount();
+        populateCartModal();
+        showAlert(`${removedItem.title} removed from cart!`);
+    }
 }
 
 // Toggle cart modal
@@ -3288,6 +3483,34 @@ document.querySelectorAll('.suggestion-btn').forEach(button => {
         }, 800);
     });
 });
+// Debounce scroll/resize events
+function debounce(func, wait = 100) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(this, args);
+        }, wait);
+    };
+}
+
+window.addEventListener('resize', debounce(() => {
+    // Handle resize
+}));
+
+// Throttle mousemove events for particles
+function throttle(func, limit = 100) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
     </script>
 </body>
 </html>
